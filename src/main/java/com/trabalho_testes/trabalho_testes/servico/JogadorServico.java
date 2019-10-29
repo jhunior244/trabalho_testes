@@ -25,7 +25,7 @@ public class JogadorServico implements IJogadorServico {
     public JogadorDto obtem(Long id) {
 
         if (ObjectUtils.isEmpty(id)){
-            throw new IllegalArgumentException("A id do jogado procurado está nula");
+            throw new IllegalArgumentException("A id do jogador procurado está nula");
         }
 
         return JogadorDto.paraDto(jogadorJpaRepository.findById(id.longValue()));
