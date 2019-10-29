@@ -7,4 +7,6 @@ import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 public interface IJogadorServico {
 
     JogadorDto cria(Jogador jogador);
+
+    JogadorDto obtem(Long id);
 }

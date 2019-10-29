@@ -18,4 +18,10 @@ public class JogadorControlador {
 
         return jogadorServico.cria(null);
     }
+
+    @GetMapping(path = "/obtem")
+    public JogadorDto obtem(Long id){
+
+        return jogadorServico.obtem(id);
+    }
 }
