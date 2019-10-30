@@ -21,7 +21,6 @@ public class JogadorControlador {
 
     @GetMapping(path = "/obtem")
     public JogadorDto obtem(Long id){
-
         return jogadorServico.obtem(id);
     }
 }
