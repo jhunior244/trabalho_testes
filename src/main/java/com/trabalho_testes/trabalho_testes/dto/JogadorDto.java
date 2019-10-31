@@ -39,4 +39,17 @@ public class JogadorDto implements Serializable {
     public static List<JogadorDto> paraDto(List<Jogador> lista) {
         return lista.stream().map(JogadorDto::new).collect(Collectors.toList());
     }
+
+    public static Jogador doDto(JogadorDto jogadorDto){
+        Jogador jogador = new Jogador();
+        jogador.setId(jogadorDto.getId());
+        jogador.setNome(jogadorDto.getNome());
+        jogador.setNumero(jogadorDto.getNumero());
+        //TODO: implementar mapeamento da lista de acaoJogador posteriormente
+        return jogador;
+    }
+
+    public static List<Jogador> doDto(List<JogadorDto> lista){
+        return lista.stream().map(JogadorDto::doDto).collect(Collectors.toList());
+    }
 }

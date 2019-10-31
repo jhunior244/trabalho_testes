@@ -32,7 +32,7 @@ public class JogadorTests {
     }
 
     @Test
-    public void shouldReturnSucessfullyWhenFindByCourse(){
+    public void shouldReturnSucessfullyWhenFindById(){
         RestAssured.given().header("Content-Type", "application/json").queryParam("id",1)
                 .when().get(endpoint.concat(endpointObtem))
                 .then().statusCode(200).and()
