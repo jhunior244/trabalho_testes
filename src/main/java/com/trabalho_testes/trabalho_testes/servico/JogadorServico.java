@@ -18,6 +18,10 @@ public class JogadorServico implements IJogadorServico {
 
     @Override
     public JogadorDto cria(Jogador jogador) {
+
+        if(ObjectUtils.isEmpty(jogador)){
+            throw new IllegalArgumentException("O jogador está nulo.");
+        }
         return JogadorDto.paraDto(jogadorJpaRepository.save(jogador));
     }
 
@@ -27,7 +31,8 @@ public class JogadorServico implements IJogadorServico {
         if (ObjectUtils.isEmpty(id)){
             throw new IllegalArgumentException("A id procurada está nula");
         }
-
         return JogadorDto.paraDto(jogadorJpaRepository.findById(id.longValue()));
     }
 }
+
+

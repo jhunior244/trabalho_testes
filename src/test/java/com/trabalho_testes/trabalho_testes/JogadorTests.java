@@ -32,10 +32,14 @@ public class JogadorTests {
     }
 
     @Test
-    public void shouldReturnSucessfullyWhenFindById(){
-        RestAssured.given().header("Content-Type", "application/json").queryParam("id",1)
+    public void shouldReturnSucessfullyWhenObtem(){
+        RestAssured.given().header("Content-Type", "application/json")
+                .queryParam("id",1)
                 .when().get(endpoint.concat(endpointObtem))
                 .then().statusCode(200).and()
                 .body("nome", equalTo("jogador teste"));
     }
 }
+
+
+

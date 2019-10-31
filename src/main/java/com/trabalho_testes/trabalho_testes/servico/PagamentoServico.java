@@ -25,24 +25,27 @@ public class PagamentoServico implements IPagamentoServico {
     private PagamentoJpaRepository pagamentoJpaRepository;
 
     @Override
-    public PagamentoDto cria(Long idJogador,String data) {
+    public PagamentoDto cria(Long idJogador, String data) {
 
         Jogador jogador = JogadorDto.doDto(jogadorServico.obtem(idJogador));
 
         if(ObjectUtils.isEmpty(jogador)){
             throw new IllegalArgumentException("O jogador indicado é inválido.");
         }
+        Pagamento pagamento = new Pagamento();
+        pagamento.setJogador(jogador);
 
-        if(ObjectUtils.isEmpty(data) || ObjectUtils.isEmpty(ZonedDateTime.parse(data, DateTimeFormatter.ISO_DATE))){
+        try{
+            pagamento.setDataPagamento(ZonedDateTime.parse(data, DateTimeFormatter.ISO_DATE));
+        } catch (Exception e){
             throw new IllegalArgumentException("Data inválida.");
         }
-
-
-        return null;
+        return PagamentoDto.paraDto(calculaPagamento(pagamento));
     }
 
-    private void calculaPagamento(Jogador jogador, Long mes){
+    private Pagamento calculaPagamento(Pagamento pagamento){
         //TODO: implementar depois
+        return null;
     }
 
     @Override
