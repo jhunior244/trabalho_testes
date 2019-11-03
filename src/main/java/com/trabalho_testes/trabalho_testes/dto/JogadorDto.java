@@ -1,9 +1,12 @@
 package com.trabalho_testes.trabalho_testes.dto;
 
+import com.querydsl.core.util.ArrayUtils;
 import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import lombok.Data;
+import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +48,9 @@ public class JogadorDto implements Serializable {
         jogador.setId(jogadorDto.getId());
         jogador.setNome(jogadorDto.getNome());
         jogador.setNumero(jogadorDto.getNumero());
-        //TODO: implementar mapeamento da lista de acaoJogador posteriormente
+        if(!ObjectUtils.isEmpty(jogadorDto.getListaAcaoJogador())){
+            jogador.setListaAcaoJogador(AcaoJogadorDto.doDto(jogadorDto.getListaAcaoJogador()));
+        }
         return jogador;
     }
 

@@ -24,3 +24,5 @@ public class JogadorControlador {
         return jogadorServico.obtem(id);
     }
 }
+
+

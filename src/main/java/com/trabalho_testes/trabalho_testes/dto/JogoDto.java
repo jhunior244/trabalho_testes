@@ -1,5 +1,6 @@
 package com.trabalho_testes.trabalho_testes.dto;
 
+import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import com.trabalho_testes.trabalho_testes.entidade.Jogo;
 import lombok.Data;
 
@@ -42,5 +43,16 @@ public class JogoDto implements Serializable {
         return lista.stream().map(JogoDto::new).collect(Collectors.toList());
     }
 
+    public static Jogo doDto(JogoDto jogoDto){
+        Jogo jogo = new Jogo();
+        jogo.setId(jogoDto.getId());
+        jogo.setAdversario(jogoDto.getAdversario());
+        jogo.setData(jogoDto.getData());
+        jogo.setResultado(ResultadoDto.doDto(jogoDto.getResultado()));
+        return jogo;
+    }
 
+    public static List<Jogador> doDto(List<JogadorDto> lista){
+        return lista.stream().map(JogadorDto::doDto).collect(Collectors.toList());
+    }
 }

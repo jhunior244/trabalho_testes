@@ -19,4 +19,7 @@ public class AcaoJogador {
 
     @ManyToOne
     private Acao acao;
+
+    @ManyToOne
+    private Jogo jogo;
 }

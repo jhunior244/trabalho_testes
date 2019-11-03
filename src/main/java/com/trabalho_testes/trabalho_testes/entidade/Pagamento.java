@@ -14,8 +14,10 @@ public class Pagamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private BigDecimal totalPago;
 
+    @Column(nullable = false)
     private ZonedDateTime dataPagamento;
 
     @ManyToOne

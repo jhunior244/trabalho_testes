@@ -1,5 +1,6 @@
 package com.trabalho_testes.trabalho_testes.dto;
 
+import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import com.trabalho_testes.trabalho_testes.entidade.SalarioBase;
 import lombok.Data;
 
@@ -35,5 +36,17 @@ public class SalarioBaseDto implements Serializable {
 
     public static List<SalarioBaseDto> paraDto(List<SalarioBase> lista){
         return lista.stream().map(SalarioBaseDto::new).collect(Collectors.toList());
+    }
+
+    public static SalarioBase doDto(SalarioBaseDto salarioBaseDto){
+        SalarioBase salarioBase = new SalarioBase();
+        salarioBase.setId(salarioBaseDto.getId());
+        salarioBase.setSalario(salarioBaseDto.getSalario());
+        salarioBase.setJogador(JogadorDto.doDto(salarioBaseDto.getJogador()));
+        return salarioBase;
+    }
+
+    public static List<SalarioBase> doDto(List<SalarioBaseDto> lista){
+        return lista.stream().map(SalarioBaseDto::doDto).collect(Collectors.toList());
     }
 }

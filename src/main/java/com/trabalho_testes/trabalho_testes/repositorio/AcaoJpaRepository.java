@@ -5,5 +5,5 @@ import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AcaoJpaRepository extends JpaRepository<Acao, Long>, AcaoJpaRepositoryCustom {
-    Jogador findById(long id);
+    Acao findById(long id);
 }
