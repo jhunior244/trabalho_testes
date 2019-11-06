@@ -10,6 +10,7 @@ import com.trabalho_testes.trabalho_testes.entidade.SalarioBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AcaoJogadorJpaRepositoryCustomImpl implements AcaoJogadorJpaRepositoryCustom {
@@ -26,18 +27,25 @@ public class AcaoJogadorJpaRepositoryCustomImpl implements AcaoJogadorJpaReposit
 
         BooleanExpression predicado = acaoJogador.id.isNotNull();
 
-        if(!ObjectUtils.isEmpty(idJogador) && !ObjectUtils.isEmpty(mes) && !ObjectUtils.isEmpty(ano)){
-
-            predicado = predicado.and(acaoJogador.jogador.id.eq(idJogador));
-
-            predicado = predicado.and(acaoJogador.jogo.data.month().eq(mes.intValue()));
-
-            predicado = predicado.and(acaoJogador.jogo.data.year().eq(ano.intValue()));
+        if(ObjectUtils.isEmpty(idJogador) || ObjectUtils.isEmpty(mes) || ObjectUtils.isEmpty(ano)){
+            return new ArrayList<>();
         }
+
+        predicado = predicado.and(acaoJogador.jogador.id.eq(idJogador));
+
+        predicado = predicado.and(acaoJogador.jogo.data.month().eq(mes.intValue()));
+
+        predicado = predicado.and(acaoJogador.jogo.data.year().eq(ano.intValue()));
 
         query.where(predicado);
 
-        return  query.fetch();
+        List<AcaoJogador> lista =  query.fetch();
+
+        return lista;
     }
 
 }
+
+
+
+

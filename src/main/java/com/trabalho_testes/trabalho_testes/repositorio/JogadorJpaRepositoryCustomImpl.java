@@ -8,8 +8,4 @@ public class JogadorJpaRepositoryCustomImpl implements JogadorJpaRepositoryCusto
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
-    public void teste(){
-
-    }
-
 }
