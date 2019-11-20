@@ -25,6 +25,9 @@
     "jshit": "0.0.1",
     "material-design-icons": "^3.0.1",
     "material-icons": "^0.3.1",
+    "moment": "^2.24.0",
+    "@swimlane/ngx-datatable": "15.0.2",
+    "@angular/flex-layout": "^8.0.0-beta.26",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

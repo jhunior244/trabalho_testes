@@ -3,13 +3,15 @@ package com.trabalho_testes.trabalho_testes.repositorio;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.trabalho_testes.trabalho_testes.entidade.AcaoJogador;
-import com.trabalho_testes.trabalho_testes.entidade.QAcaoJogador;
-import com.trabalho_testes.trabalho_testes.entidade.QSalarioBase;
-import com.trabalho_testes.trabalho_testes.entidade.SalarioBase;
+import com.trabalho_testes.trabalho_testes.entidade.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class AcaoJogadorJpaRepositoryCustomImpl implements AcaoJogadorJpaReposit
 
         return lista;
     }
+
 
 }
 

@@ -10,6 +10,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule, MatFormFieldModule, MatInputModule
+} from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { JogadorService } from './app/servico/jogador/jogador.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,9 +31,17 @@ import {MatListModule} from '@angular/material/list';
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxDatatableModule,
+    MatInputModule,
+    HttpClientModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [JogadorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

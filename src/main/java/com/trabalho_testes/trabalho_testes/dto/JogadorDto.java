@@ -3,6 +3,8 @@ package com.trabalho_testes.trabalho_testes.dto;
 import com.querydsl.core.util.ArrayUtils;
 import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
@@ -56,5 +58,12 @@ public class JogadorDto implements Serializable {
 
     public static List<Jogador> doDto(List<JogadorDto> lista){
         return lista.stream().map(JogadorDto::doDto).collect(Collectors.toList());
+    }
+
+    public static Page<JogadorDto> paraPageDto(Page<Jogador> pagina){
+        List<JogadorDto> lista = pagina.getContent().stream()
+                .map(jogador -> new JogadorDto(jogador)).collect(Collectors.toList());
+
+        return new PageImpl<>(lista, pagina.getPageable(), pagina.getTotalElements());
     }
 }
