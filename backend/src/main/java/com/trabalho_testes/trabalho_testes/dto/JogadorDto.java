@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,10 @@ public class JogadorDto implements Serializable {
 
     private Integer numero;
 
+    private BigDecimal salario;
+
+    private String posicao;
+
     private List<AcaoJogadorDto> listaAcaoJogador;
 
     private JogadorDto(){}
@@ -29,6 +34,8 @@ public class JogadorDto implements Serializable {
         this.id = jogador.getId();
         this.nome = jogador.getNome();
         this.numero = jogador.getNumero();
+        this.salario = jogador.getSalario();
+        this.posicao = jogador.getPosicao();
         this.listaAcaoJogador = AcaoJogadorDto.paraDto(jogador.getListaAcaoJogador());
     }
 
@@ -38,6 +45,8 @@ public class JogadorDto implements Serializable {
         jogadorDto.setId(jogador.getId());
         jogadorDto.setNome(jogador.getNome());
         jogadorDto.setNumero(jogador.getNumero());
+        jogadorDto.setSalario(jogador.getSalario());
+        jogadorDto.setPosicao(jogador.getPosicao());
         return jogadorDto;
     }
 
@@ -50,6 +59,8 @@ public class JogadorDto implements Serializable {
         jogador.setId(jogadorDto.getId());
         jogador.setNome(jogadorDto.getNome());
         jogador.setNumero(jogadorDto.getNumero());
+        jogador.setSalario(jogadorDto.getSalario());
+        jogador.setPosicao(jogadorDto.getPosicao());
         if(!ObjectUtils.isEmpty(jogadorDto.getListaAcaoJogador())){
             jogador.setListaAcaoJogador(AcaoJogadorDto.doDto(jogadorDto.getListaAcaoJogador()));
         }

@@ -2,6 +2,7 @@ package com.trabalho_testes.trabalho_testes.servico;
 
 import com.trabalho_testes.trabalho_testes.dto.JogadorDto;
 import com.trabalho_testes.trabalho_testes.entidade.Jogador;
+import com.trabalho_testes.trabalho_testes.gerenciadorexception.GerenciadorException;
 import com.trabalho_testes.trabalho_testes.repositorio.JogadorJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,11 +21,23 @@ public class JogadorServico implements IJogadorServico {
     private JogadorJpaRepository jogadorJpaRepository;
 
     @Override
-    public JogadorDto cria(Jogador jogador) {
+    public JogadorDto cria(Jogador jogador) throws GerenciadorException {
 
         if(ObjectUtils.isEmpty(jogador)){
-            throw new IllegalArgumentException("O jogador está nulo.");
+            throw GerenciadorException.criaExcessao("O jogador está nulo.");
         }
+        return JogadorDto.paraDto(jogadorJpaRepository.save(jogador));
+    }
+
+    @Override
+    public JogadorDto atualiza(Jogador jogador) throws GerenciadorException {
+        Jogador jogadorBanco = jogadorJpaRepository.findById(jogador.getId().longValue());
+
+        jogadorBanco.setNome(jogador.getNome());
+        jogadorBanco.setNumero(jogador.getNumero());
+        jogadorBanco.setSalario(jogador.getSalario());
+        jogadorBanco.setPosicao(jogador.getPosicao());
+
         return JogadorDto.paraDto(jogadorJpaRepository.save(jogador));
     }
 
@@ -38,8 +51,8 @@ public class JogadorServico implements IJogadorServico {
     }
 
     @Override
-    public Page<Jogador> lista(Pageable pagina){
-        return jogadorJpaRepository.lista(pagina);
+    public Page<Jogador> lista(String nome, Long numero, Pageable pagina){
+        return jogadorJpaRepository.lista(nome, numero, pagina);
     }
 }
 

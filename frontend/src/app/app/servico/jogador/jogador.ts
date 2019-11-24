@@ -2,13 +2,19 @@ import { IAcaoJogador, AcaoJogador } from '../acao-jogador/acao-jogador';
 
 export class IJogador {
     id: number;
-    total: number;
+    nome: string;
+    numero: number;
+    posicao: string;
+    salario: number;
     listaAcaoJogador: IAcaoJogador[];
 }
 
 export class Jogador {
     id: number;
-    total: number;
+    nome: string;
+    numero: number;
+    posicao: string;
+    salario: number;
     listaAcaoJogador: AcaoJogador[];
 
     static listaDoBackend(response: IJogador[]): Jogador[] {
@@ -24,10 +30,9 @@ export class Jogador {
     static doBackend(response: IJogador): Jogador {
         let jogador = Object.create(Jogador.prototype);
 
-        jogador = Object.assign(Jogador, response, {
+        jogador = Object.assign(jogador, response, {
 
         });
-
         return jogador;
     }
 

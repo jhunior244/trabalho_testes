@@ -1,6 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row fxLayoutAlign="end center">
-        <button mat-button color="primary">
+        <button mat-button color="primary" name="filtro">
             <mat-icon (click)="filtro.toggle()">line_weight</mat-icon>
         </button>
     </mat-toolbar-row>
@@ -10,10 +10,10 @@
         <div class="my-2" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
             <mat-card class="card-filtro">
                 <mat-card-actions fxLayoutAlign="space-around start">
-                    <button mat-icon-button color="primary" (click)="listaJogadores()">
+                    <button name="buscaJogador" mat-icon-button color="primary" (click)="listaJogadores()">
                         <mat-icon>search</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="criaEvento()">
+                    <button name="adicionaJogador" mat-icon-button color="warn" (click)="criaEvento()">
                         <mat-icon>add_circle</mat-icon>
                     </button>
                 </mat-card-actions>
@@ -39,21 +39,53 @@
         <div class="margin">
             <mat-card fxFlex="98">
                 <mat-card-content style="position:center; max-width: 100%; max-height: 98%">
-                    <ngx-datatable class="material" [rows]="rows" [columnMode]="'flex'" [headerHeight]="50"
+                    <ngx-datatable name="dataTable" class="material" [rows]="rows" [columnMode]="'flex'" [headerHeight]="50"
                         [selectionType]="true" [footerHeight]="50"
                         [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
-                        [limit]="page.size" (page)='setPage($event)' [rowHeight]="32" [scrollbarH]="true"
+                        [limit]="page.size" (page)='setPage($event)' [rowHeight]="45" [scrollbarH]="true"
                         [selected]="selected" (select)='aoCliqueGrid($event)'>
 
-                        <ngx-datatable-column prop="nome" [flexGrow]="0.5">
-                            <ng-template style="font-size: 23px;" let-column="nome" ngx-datatable-header-template tyle="position:center;">
-                                <span>Nome</span>
+                        <ngx-datatable-column prop="nome" [flexGrow]="5">
+                            <ng-template let-column="nome" ngx-datatable-header-template>
+                                <span style="font-size: 23px;">Nome</span>
                             </ng-template>
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                <span style="font-size: 23px; align-items: center;">
+                                  {{value}}
+                                </span>
+                              </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column prop="numero" [flexGrow]="5">
+                        <ngx-datatable-column prop="numero" [flexGrow]="2">
                             <ng-template let-column="numero" ngx-datatable-header-template>
-                                <span>Numero</span>
+                                <span style="font-size: 23px;">Numero</span>
+                            </ng-template>
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                <span style="font-size: 23px;">
+                                    {{value}}
+                                </span>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        
+                        <ngx-datatable-column prop="posicao" [flexGrow]="2">
+                            <ng-template let-column="posicao" ngx-datatable-header-template>
+                                <span style="font-size: 23px;">Posição</span>
+                            </ng-template>
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                <span style="font-size: 23px;">
+                                    {{value}}
+                                </span>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        
+                        <ngx-datatable-column prop="salario" [flexGrow]="2">
+                            <ng-template let-column="salario" ngx-datatable-header-template>
+                                <span style="font-size: 23px;">Sálario</span>
+                            </ng-template>
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                <span style="font-size: 23px;">
+                                    {{value}}
+                                </span>
                             </ng-template>
                         </ngx-datatable-column>
                     </ngx-datatable>

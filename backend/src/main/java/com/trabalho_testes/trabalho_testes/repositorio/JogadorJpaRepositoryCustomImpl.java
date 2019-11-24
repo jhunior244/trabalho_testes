@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class JogadorJpaRepositoryCustomImpl implements JogadorJpaRepositoryCusto
     private JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public Page<Jogador> lista(Pageable pagina) {
+    public Page<Jogador> lista(String nome, Long numero, Pageable pagina) {
 
         QJogador qJogador = QJogador.jogador;
 
@@ -26,7 +28,13 @@ public class JogadorJpaRepositoryCustomImpl implements JogadorJpaRepositoryCusto
 
         BooleanExpression predicado = qJogador.id.isNotNull();
 
-        predicado = predicado.and(qJogador.nome.eq("jogador teste"));
+        if(!StringUtils.isEmpty(nome)){
+            predicado = predicado.and(qJogador.nome.containsIgnoreCase(nome));
+        }
+
+        if(!ObjectUtils.isEmpty(numero)){
+            predicado = predicado.and(qJogador.numero.eq(numero.intValue()));
+        }
 
         query.where(predicado);
 

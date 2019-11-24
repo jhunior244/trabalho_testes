@@ -2,7 +2,9 @@ package com.trabalho_testes.trabalho_testes.controlador;
 
 import com.trabalho_testes.trabalho_testes.dto.JogadorDto;
 import com.trabalho_testes.trabalho_testes.entidade.Jogador;
+import com.trabalho_testes.trabalho_testes.gerenciadorexception.GerenciadorException;
 import com.trabalho_testes.trabalho_testes.servico.IJogadorServico;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,9 +24,13 @@ public class JogadorControlador {
     private IJogadorServico jogadorServico;
 
     @PostMapping(path = "/cria")
-    public JogadorDto cria(@RequestBody JogadorDto jogadorDto){
+    public JogadorDto cria(@RequestBody JogadorDto jogadorDto) throws GerenciadorException {
+        return jogadorServico.cria(JogadorDto.doDto(jogadorDto));
+    }
 
-        return jogadorServico.cria(null);
+    @PutMapping(path = "/atualiza")
+    public JogadorDto atualiza(@RequestBody JogadorDto jogadorDto) throws GerenciadorException {
+        return jogadorServico.atualiza(JogadorDto.doDto(jogadorDto));
     }
 
     @GetMapping(path = "/obtem")
@@ -33,7 +39,7 @@ public class JogadorControlador {
     }
 
     @GetMapping(path = "/lista")
-    public Page<JogadorDto> lista(Long numeroPagina, Long tamanhoPagina){
+    public Page<JogadorDto> lista(String nome, Long numero, Long numeroPagina, Long tamanhoPagina){
         if(numeroPagina == null || tamanhoPagina == null){
             numeroPagina = 0L;
             tamanhoPagina = 10L;
@@ -42,7 +48,7 @@ public class JogadorControlador {
         Pageable pagina = PageRequest.of(numeroPagina.intValue(), tamanhoPagina.intValue());
 
 
-        Page<Jogador> page = jogadorServico.lista(pagina);
+        Page<Jogador> page = jogadorServico.lista(nome, numero, pagina);
 
         return JogadorDto.paraPageDto(page);
     }

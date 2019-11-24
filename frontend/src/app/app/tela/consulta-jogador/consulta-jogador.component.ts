@@ -4,6 +4,8 @@ import { MatSidenav } from '@angular/material';
 import { IJogador, Jogador } from '../../servico/jogador/jogador';
 import { IPagina } from '../../servico/pagina/pagina';
 import { JogadorService } from '../../servico/jogador/jogador.service';
+import { Router } from '@angular/router';
+import { constanteRotas } from '../../configuracao';
 
 @Component({
   selector: 'app-consulta-jogador',
@@ -27,7 +29,8 @@ export class ConsultaJogadorComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private jogadorService: JogadorService
+    private jogadorService: JogadorService,
+    private router: Router
   ) {
     this.page.offset = 0;
     this.page.size = 10;
@@ -44,7 +47,6 @@ export class ConsultaJogadorComponent implements OnInit {
 
   atualizaNome($event) {
     this.nome = $event.target.value;
-    console.log(this.nome);
   }
 
   atualizaNumero($event) {
@@ -53,27 +55,36 @@ export class ConsultaJogadorComponent implements OnInit {
 
   listaJogadores() {
 
-    this.jogadorService.lista(this.page.pageNumber, this.page.size).subscribe(paginaEventoBack => {
+    this.jogadorService.lista(this.nome, this.numero, this.page.pageNumber, this.page.size).subscribe(paginaJogadores => {
         this.filtro.toggle();
-        this.page.pageNumber = paginaEventoBack.pageable.pageNumber;
-        this.page.totalElements = paginaEventoBack.totalElements;
-        this.page.totalPages = paginaEventoBack.totalPages;
-        this.rows = paginaEventoBack.content;
+        this.page.pageNumber = paginaJogadores.pageable.pageNumber;
+        this.page.totalElements = paginaJogadores.totalElements;
+        this.page.totalPages = paginaJogadores.totalPages;
+        this.rows = paginaJogadores.content;
+        console.log(this.rows);
       }, erro => {
         console.log(erro);
       });
   }
 
   setPage($event): void {
-    this.jogadorService.lista($event.offset, this.page.size)
-      .subscribe(paginaEventoBack => {
-        this.page.pageNumber = paginaEventoBack.pageable.pageNumber;
-        this.page.totalElements = paginaEventoBack.totalElements;
-        this.page.totalPages = paginaEventoBack.totalPages;
-        this.rows = paginaEventoBack.content;
+    this.jogadorService.lista(this.nome, this.numero, $event.offset, this.page.size)
+      .subscribe(paginaJogadores => {
+        this.page.pageNumber = paginaJogadores.pageable.pageNumber;
+        this.page.totalElements = paginaJogadores.totalElements;
+        this.page.totalPages = paginaJogadores.totalPages;
+        this.rows = paginaJogadores.content;
       }, erro => {
         console.log(erro);
       });
   }
+
+  aoCliqueGrid({selected}){
+    this.router.navigate([constanteRotas.rotaEditaJogador + '/' + selected[0].id ]);
+  }
+
+  criaEvento(){
+    this.router.navigate([constanteRotas.rotaEditaJogador]);
+ }
 
 }

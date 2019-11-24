@@ -8,6 +8,6 @@ import java.time.ZonedDateTime;
 
 public interface JogadorJpaRepositoryCustom {
 
-    Page<Jogador> lista(Pageable pagina);
+    Page<Jogador> lista(String nome, Long numero, Pageable pagina);
 
 }

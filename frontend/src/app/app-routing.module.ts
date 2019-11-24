@@ -7,8 +7,8 @@ import { ConsultaJogadorComponent } from './app/tela/consulta-jogador/consulta-j
 
 const routes: Routes = [
   {path: constanteRotas.rotaConsultaJogador, component: ConsultaJogadorComponent },
-  {path: constanteRotas.rotaConsultaJogador, component: CadastroJogadorComponent },
-  {path: constanteRotas.rotaConsultaJogador + '/:' + constanteRotas.parametroId, component: CadastroJogadorComponent },
+  {path: constanteRotas.rotaEditaJogador, component: CadastroJogadorComponent },
+  {path: constanteRotas.rotaEditaJogador + '/:' + constanteRotas.parametroId, component: CadastroJogadorComponent },
 ];
 
 @NgModule({

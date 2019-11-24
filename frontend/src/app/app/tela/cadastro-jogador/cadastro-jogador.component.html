@@ -1,1 +1,53 @@
-<p>cadastro-jogador works!</p>
+<div class="area-central">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title style="font-size: 35px; font-style: initial;">Cadastro de Jogador</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="column">
+                <form fxLayout="row wrap" [formGroup]="formGroup" fxLayoutAlign="space-between center">
+
+                    <mat-form-field style="font-size: 25px" fxFlex="45">
+                        <input name="nomeJogador" type="text" matInput [(ngModel)]="jogador.nome"
+                            placeholder="Nome Jogador" [formControl]="formGroup.controls.nomeJogador">
+                        <mat-error
+                            *ngIf="formGroup?.controls['nomeJogador']?.hasError('required') && formGroup?.controls['nomeJogador']?.touched">
+                            Campo obrigátorio </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field style="font-size: 25px" fxFlex="45">
+                        <input name="numeroJogador" type="number" matInput [(ngModel)]="jogador.numero" placeholder="Numero camisa"
+                            [formControl]="formGroup.controls.numeroJogador">
+                        <mat-error
+                            *ngIf="formGroup?.controls['numeroJogador']?.hasError('required') && formGroup?.controls['numeroJogador']?.touched">
+                            Campo obrigátorio </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field style="font-size: 25px; " fxFlex="70">
+                        <mat-label>Posição</mat-label>
+                        <mat-select name="posicaoJogador" (selectionChange)="atualizaPosicao($event?.value)" [(ngModel)]="jogador.posicao"
+                             [formControl]="formGroup.controls.posicaoJogador"  [compareWith]="compareObjects">
+                            <mat-option *ngFor="let posicao of listaPosicoes" [value]="posicao">
+                               <span>{{posicao}}</span> 
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field style="font-size: 25px;" fxFlex="28">
+                        <input name="salarioJogador" type="number" matInput [(ngModel)]="jogador.salario" placeholder="Salário base"
+                            [formControl]="formGroup.controls.salarioJogador">
+                        <mat-error
+                            *ngIf="formGroup?.controls['salarioJogador']?.hasError('required') && formGroup?.controls['salarioJogador']?.touched">
+                            Campo obrigátorio </mat-error>
+                    </mat-form-field>
+                </form>
+                <div fxLayoutAlign="space-around center" fxFlex="grow">
+                    <button name="submit" style="font-size: 20px" fxFlex="80" [disabled]="!formGroup.valid" mat-raised-button color="primary"
+                        type="submit" (click)="salva()">
+                        <mat-icon>done</mat-icon>Cadastrar
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

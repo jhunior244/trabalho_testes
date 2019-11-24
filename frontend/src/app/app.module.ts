@@ -11,7 +11,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule, MatFormFieldModule, MatInputModule
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -39,7 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
     NgxDatatableModule,
     MatInputModule,
     HttpClientModule,
-    FlexLayoutModule
+    MatSelectModule,
+    FlexLayoutModule,
+    MatButtonModule
   ],
   providers: [JogadorService],
   bootstrap: [AppComponent]
