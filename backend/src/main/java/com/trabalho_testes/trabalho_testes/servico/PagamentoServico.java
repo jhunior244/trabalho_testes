@@ -2,25 +2,22 @@ package com.trabalho_testes.trabalho_testes.servico;
 
 import com.trabalho_testes.trabalho_testes.dto.JogadorDto;
 import com.trabalho_testes.trabalho_testes.dto.PagamentoDto;
-import com.trabalho_testes.trabalho_testes.dto.SalarioBaseDto;
 import com.trabalho_testes.trabalho_testes.entidade.*;
 import com.trabalho_testes.trabalho_testes.repositorio.AcaoJogadorJpaRepository;
 import com.trabalho_testes.trabalho_testes.repositorio.PagamentoJpaRepository;
-import com.trabalho_testes.trabalho_testes.repositorio.SalarioBaseBaseJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
 
+@Component
 @Service
 @Transactional
 public class PagamentoServico implements IPagamentoServico {
@@ -30,9 +27,6 @@ public class PagamentoServico implements IPagamentoServico {
 
     @Autowired
     private PagamentoJpaRepository pagamentoJpaRepository;
-
-    @Autowired
-    private SalarioBaseBaseJpaRepository salarioBaseBaseJpaRepository;
 
     @Autowired
     private AcaoJogadorJpaRepository acaoJogadorJpaRepository;
@@ -49,7 +43,8 @@ public class PagamentoServico implements IPagamentoServico {
         pagamento.setJogador(jogador);
 
         try{
-            pagamento.setDataPagamento(ZonedDateTime.of(LocalDate.parse(data), LocalTime.now(), ZoneId.of("America/Sao_Paulo")));
+            pagamento.setDataPagamento(ZonedDateTime.of(LocalDate.parse(data), LocalTime.now(),
+                    ZoneId.of("America/Sao_Paulo")));
         } catch (Exception e){
             throw new IllegalArgumentException("Data inválida.");
         }
@@ -57,7 +52,7 @@ public class PagamentoServico implements IPagamentoServico {
     }
 
     private Pagamento calculaPagamento(Pagamento pagamento){
-        SalarioBase salarioBase = salarioBaseBaseJpaRepository.obtemPorJogador(pagamento.getJogador().getId());
+        BigDecimal salarioBase = pagamento.getJogador().getSalario();
 
         Integer mesPagamento = pagamento.getDataPagamento().getMonthValue();
 
@@ -75,15 +70,14 @@ public class PagamentoServico implements IPagamentoServico {
          pagamento.setDataPagamento(ZonedDateTime.now());
 
          BigDecimal pagamentoMes = (pontuacaoMensal.divide(new BigDecimal(100)).add(BigDecimal.ONE))
-                 .multiply(salarioBase.getSalario());
+                 .multiply(salarioBase);
 
          if(pagamentoMes.compareTo(new BigDecimal(100000)) == 1){
             pagamentoMes = new BigDecimal(100000);
          } else if (pagamentoMes.compareTo(new BigDecimal(10000)) == -1){
              pagamentoMes = new BigDecimal(10000);
-         } else {
-             pagamento.setTotalPago(pagamentoMes);
          }
+         pagamento.setTotalPago(pagamentoMes);
          pagamento = pagamentoJpaRepository.save(pagamento);
         return pagamento;
     }
@@ -91,5 +85,10 @@ public class PagamentoServico implements IPagamentoServico {
     @Override
     public PagamentoDto obtem(Long id) {
         return PagamentoDto.paraDto(pagamentoJpaRepository.findById(id.longValue()));
+    }
+
+    @Override
+    public Page<Pagamento> lista(Long mes, Long ano, Pageable pagina){
+        return pagamentoJpaRepository.lista(mes, ano, pagina);
     }
 }

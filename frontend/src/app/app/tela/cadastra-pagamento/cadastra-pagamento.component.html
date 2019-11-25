@@ -1,0 +1,39 @@
+<div class="area-central">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title style="font-size: 35px; font-style: initial;">Cadastro de Pagamento</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="column">
+                <form fxLayout="row wrap" [formGroup]="formGroup" fxLayoutAlign="space-between center">
+
+                    <mat-form-field style="font-size: 25px; size: 80%" fxFlex="45">
+                        <mat-label>Jogador</mat-label>
+                        <mat-select (selectionChange)="atualizaJogador($event?.value)"
+                            [(ngModel)]="jogador" [compareWith]="compareObjects"
+                            [formControl]="formGroup.controls.jogador">
+                            <mat-option *ngFor="let jogador of $listaJogador | async" [value]="jogador">
+                                {{jogador.nome}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field style="font-size: 25px" fxFlex="45">
+                        <input name="data" type="text" matInput [(ngModel)]="data" placeholder="Data Pagamento"
+                            [formControl]="formGroup.controls.data">
+                        <mat-error
+                            *ngIf="formGroup?.controls['data']?.hasError('required') && formGroup?.controls['data']?.touched">
+                            Campo obrigátorio </mat-error>
+                    </mat-form-field>
+
+                </form>
+                <div fxLayoutAlign="space-around center" fxFlex="grow">
+                    <button name="submit" style="font-size: 20px" fxFlex="80" [disabled]="!formGroup.valid" mat-raised-button color="primary"
+                        type="submit" (click)="salva()">
+                        <mat-icon>done</mat-icon>Salvar
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

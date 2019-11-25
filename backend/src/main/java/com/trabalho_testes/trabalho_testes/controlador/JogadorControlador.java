@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -47,10 +48,14 @@ public class JogadorControlador {
 
         Pageable pagina = PageRequest.of(numeroPagina.intValue(), tamanhoPagina.intValue());
 
-
         Page<Jogador> page = jogadorServico.lista(nome, numero, pagina);
 
         return JogadorDto.paraPageDto(page);
+    }
+
+    @GetMapping(path = "/listaTodos")
+    public List<JogadorDto> listaTodos(){
+        return JogadorDto.paraDto(jogadorServico.listaTodos());
     }
 }
 

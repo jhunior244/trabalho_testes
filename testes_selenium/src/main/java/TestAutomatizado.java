@@ -21,7 +21,8 @@ public class TestAutomatizado {
         WebElement adicionaJogador = driver.findElement(By.name("adicionaJogador"));
         adicionaJogador.click();
 
-        driver.findElement(By.name("nomeJogador")).sendKeys("VetorZim");
+        driver.findElement(By.name("nomeJogador"))
+                .sendKeys("Julimar dos Santos");
         Thread.sleep(3000);
         driver.findElement(By.name("numeroJogador")).sendKeys("22");
         Thread.sleep(3000);
@@ -30,13 +31,11 @@ public class TestAutomatizado {
         WebElement posicaoJogador = driver.findElement(By.name("posicaoJogador"));
         posicaoJogador.click();
 
-
-        //dsfsdf
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Goleiro']")));
+        wait.until(ExpectedConditions
+                .elementToBeClickable(By.xpath("//span[text()='Goleiro']")));
 
         driver.findElement(By.xpath("//span[text()='Goleiro']")).click();
-        //dsfsdf
         Thread.sleep(3000);
 
         WebElement botaoCadastrar = driver.findElement(By.name("submit"));
@@ -60,3 +59,5 @@ public class TestAutomatizado {
 
     }
 }
+
+

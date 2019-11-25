@@ -17,12 +17,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { JogadorService } from './app/servico/jogador/jogador.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ConsultaPagamentoComponent } from './app/tela/consulta-pagamento/consulta-pagamento.component';
+import { PagamentoService } from './app/servico/pagamento/pagamento.service';
+import { CadastraPagamentoComponent } from './app/tela/cadastra-pagamento/cadastra-pagamento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastroJogadorComponent,
-    ConsultaJogadorComponent
+    ConsultaJogadorComponent,
+    ConsultaPagamentoComponent,
+    CadastraPagamentoComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     MatButtonModule
   ],
-  providers: [JogadorService],
+  providers: [JogadorService, PagamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

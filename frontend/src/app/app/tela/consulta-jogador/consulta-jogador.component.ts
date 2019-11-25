@@ -61,7 +61,6 @@ export class ConsultaJogadorComponent implements OnInit {
         this.page.totalElements = paginaJogadores.totalElements;
         this.page.totalPages = paginaJogadores.totalPages;
         this.rows = paginaJogadores.content;
-        console.log(this.rows);
       }, erro => {
         console.log(erro);
       });

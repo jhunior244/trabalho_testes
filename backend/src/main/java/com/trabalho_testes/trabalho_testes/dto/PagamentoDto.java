@@ -1,7 +1,10 @@
 package com.trabalho_testes.trabalho_testes.dto;
 
+import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import com.trabalho_testes.trabalho_testes.entidade.Pagamento;
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -57,5 +60,12 @@ public class PagamentoDto implements Serializable {
 
     public static List<Pagamento> doDto(List<PagamentoDto> lista){
         return lista.stream().map(PagamentoDto::doDto).collect(Collectors.toList());
+    }
+
+    public static Page<PagamentoDto> paraPageDto(Page<Pagamento> pagina){
+        List<PagamentoDto> lista = pagina.getContent().stream()
+                .map(pagamento -> new PagamentoDto(pagamento)).collect(Collectors.toList());
+
+        return new PageImpl<>(lista, pagina.getPageable(), pagina.getTotalElements());
     }
 }

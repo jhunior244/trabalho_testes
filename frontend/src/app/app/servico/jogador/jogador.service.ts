@@ -50,6 +50,12 @@ export class JogadorService {
             .pipe(map((pagina => this.obtemPagina(pagina))));
     }
 
+    public listaTodos(): Observable<Jogador[]> {
+
+        return this.httpCliente.get<IJogador[]>(this.url + '/listaTodos')
+            .pipe(map(((lista: Jogador[]) => Jogador.listaDoBackend(lista))));
+    }
+
     private obtemPagina(pagina: IPagina<IJogador, Jogador>): IPagina<IJogador, Jogador> {
         pagina.conteudo = Jogador.listaDoBackend(pagina.content);
         return pagina;

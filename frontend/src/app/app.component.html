@@ -9,11 +9,16 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav>
-      <mat-nav-list fxLayoutAlign="space-around center">
-          <a class="estilo-itens-menu" mat-list-item routerLink="consultaJogador" 
-          routerLinkActive="mat-accent">Jogador  
-        </a>
+  <mat-sidenav #sidenav >
+      <mat-nav-list fxLayoutAlign="space-around center" fxLayout="column">
+          <a class="estilo-itens-menu" mat-list-item routerLink="consultaJogador" routerLinkActive="mat-accent">Jogador
+          </a>
+          <a class="estilo-itens-menu" mat-list-item routerLink="consultaPagamentoJogador" routerLinkActive="mat-accent">Pagamento
+          </a>
+          <a class="estilo-itens-menu" mat-list-item routerLinkActive="mat-accent">Jogo
+          </a>
+          <a class="estilo-itens-menu" mat-list-item routerLinkActive="mat-accent">Ação
+          </a>
       </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

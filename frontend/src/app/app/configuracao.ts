@@ -3,5 +3,7 @@ export const constanteRotas = {
 
     rotaConsultaJogador: 'consultaJogador',
     rotaEditaJogador: 'editaJogador',
+    rotaConsultaPagamento: 'consultaPagamentoJogador',
+    rotaCadastraPagamento: 'cadastraPagamentoJogador',
     parametroId: 'id'
 };

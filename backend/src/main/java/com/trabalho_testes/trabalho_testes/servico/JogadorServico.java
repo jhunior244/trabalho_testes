@@ -12,6 +12,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -54,6 +55,13 @@ public class JogadorServico implements IJogadorServico {
     public Page<Jogador> lista(String nome, Long numero, Pageable pagina){
         return jogadorJpaRepository.lista(nome, numero, pagina);
     }
+
+    @Override
+    public List<Jogador> listaTodos(){
+        List<Jogador> lista = jogadorJpaRepository.findAll();
+        return lista;
+    }
+
 }
 
 
