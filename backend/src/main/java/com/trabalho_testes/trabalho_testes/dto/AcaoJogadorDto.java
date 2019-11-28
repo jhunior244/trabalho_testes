@@ -1,10 +1,14 @@
 package com.trabalho_testes.trabalho_testes.dto;
 
+
 import com.trabalho_testes.trabalho_testes.entidade.AcaoJogador;
 import com.trabalho_testes.trabalho_testes.entidade.Jogador;
 import lombok.Data;
+import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +52,9 @@ public class AcaoJogadorDto implements Serializable {
     }
 
     public static List<AcaoJogador> doDto(List<AcaoJogadorDto> lista){
+        if(CollectionUtils.isEmpty(lista)){
+            return new ArrayList<>();
+        }
         return lista.stream().map(AcaoJogadorDto::doDto).collect(Collectors.toList());
     }
 }

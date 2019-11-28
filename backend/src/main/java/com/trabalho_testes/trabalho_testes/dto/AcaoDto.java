@@ -21,7 +21,7 @@ public class AcaoDto implements Serializable {
 
     private List<AcaoJogadorDto> listaAcaoJogador;
 
-    private AcaoDto(){}
+    public AcaoDto(){}
 
     private AcaoDto(Acao acao){
         this.id = acao.getId();

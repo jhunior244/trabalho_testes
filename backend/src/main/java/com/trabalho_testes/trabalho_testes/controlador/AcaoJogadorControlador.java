@@ -17,17 +17,6 @@ public class AcaoJogadorControlador {
     @Autowired
     private IAcaoJogadorServico acaoJogadorServico;
 
-    @PostMapping(path = "/cria")
-    public AcaoJogadorDto cria(@RequestBody AcaoJogadorDto acaoJogadorDto){
-
-        return acaoJogadorServico.cria(acaoJogadorDto);
-    }
-
-    @GetMapping(path = "/obtem")
-    public AcaoJogadorDto obtem(Long id){
-        return acaoJogadorServico.obtem(id);
-    }
-
     @GetMapping(path = "/listaPorJogadorEMesDoAno")
     public List<AcaoJogadorDto> listaPorJogadorEMesDoAno(Long idJogador, Integer mes, Integer ano){
 

@@ -1,6 +1,7 @@
 package com.trabalho_testes.trabalho_testes.controlador;
 
 import com.trabalho_testes.trabalho_testes.dto.PagamentoDto;
+import com.trabalho_testes.trabalho_testes.gerenciadorexception.GerenciadorException;
 import com.trabalho_testes.trabalho_testes.servico.IPagamentoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,7 @@ public class PagamentoControlador {
     private IPagamentoServico pagamentoServico;
 
     @GetMapping(path = "/cria")
-    public PagamentoDto cria(Long idJogador, String data){
+    public PagamentoDto cria(Long idJogador, String data) throws GerenciadorException {
 
         return pagamentoServico.cria(idJogador, data);
     }

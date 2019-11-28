@@ -19,14 +19,15 @@ public class TestAutomatizado {
         Thread.sleep(3000);
         filtro.click();
         WebElement adicionaJogador = driver.findElement(By.name("adicionaJogador"));
+        Thread.sleep(3000);
         adicionaJogador.click();
 
         driver.findElement(By.name("nomeJogador"))
                 .sendKeys("Julimar dos Santos");
         Thread.sleep(3000);
-        driver.findElement(By.name("numeroJogador")).sendKeys("22");
+        driver.findElement(By.name("numeroJogador")).sendKeys("28");
         Thread.sleep(3000);
-        driver.findElement(By.name("salarioJogador")).sendKeys("10000");
+        driver.findElement(By.name("salarioJogador")).sendKeys("12000");
         Thread.sleep(3000);
         WebElement posicaoJogador = driver.findElement(By.name("posicaoJogador"));
         posicaoJogador.click();
@@ -50,7 +51,7 @@ public class TestAutomatizado {
         Thread.sleep(3000);
 
         WebElement nome = driver.findElement(By.name("nomeJogador"));
-        nome.sendKeys("VetorZim");
+        nome.sendKeys("Julimar");
         Thread.sleep(3000);
 
         WebElement buscaJogador = driver.findElement(By.name("buscaJogador"));

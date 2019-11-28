@@ -5,7 +5,7 @@ import com.trabalho_testes.trabalho_testes.entidade.Acao;
 
 public interface IAcaoServico {
 
-    AcaoDto cria(Acao acao);
+    AcaoDto cria(AcaoDto acao);
 
     AcaoDto obtem(Long id);
 }
